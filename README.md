@@ -1,2 +1,2 @@
 # VyosGUI
-Vyos GUI for Capstone
+Champlain College Capstone: Creating a Web GUI for VyOS
