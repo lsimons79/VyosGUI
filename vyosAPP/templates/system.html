@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Set System Commands{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="hostname">Hostname</label>
+    <input type="text" name="hostname" id="hostname">
+    <br><label for="dns">Primary DNS Server</label>
+    <input type="text" name="dns" id="dns">
+    <br><label for="gateway">Default Gateway</label>
+    <input type="text" name="gateway" id="gateway">
+    <br><input type="submit" value="Commit">
+  </form>
+{% endblock %}
