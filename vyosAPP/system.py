@@ -9,12 +9,12 @@ bp = Blueprint('system', __name__, url_prefix='/system')
 @bp.route('/settings', methods=('GET', 'POST'))
 def settings():
 	if request.method == 'POST':
-		hostname = request.form['hostname']
-		name_server = request.form['dns']
-		gateway_address = request.form['gateway']
+		u_host = request.form['hostname']
+		u_dns = request.form['dns']
+		u_gateway = request.form['gateway']
  
 		try:
-			vyos.
+			vyos = RouterMGMT.system(u_host, u_dns, u_gateway)
 		except pexpect.pxssh.ExceptionPxssh as e:
 			error_state = True
 			error = str(e)
@@ -29,3 +29,9 @@ def settings():
 		flash(e) 
 
 	return render_template('system.html')
+
+@bp.route('/logout')
+def logout(vyos):
+	session.clear()
+	vyos.logout()
+	return redirect(url_for('auth'))
