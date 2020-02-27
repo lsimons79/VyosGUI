@@ -25,10 +25,10 @@ def create_app(test_config=None):
 		return 'Hello, World!'
 
 	#Applying blueprints to application
-	from vyosAPP import login
+	from vyosAPP import login, system
 	
 	app.register_blueprint(login.bp)
-	#app.register_blueprint(system.bp)
+	app.register_blueprint(system.bp)
 
 	return app
 	
