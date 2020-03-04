@@ -44,8 +44,7 @@ def settings():
 	return render_template('system.html')
 
 
-@bp.route('/logout')
-def logout(vyos):
-	session.clear()
-	vyos.logout()
-	return redirect(url_for('auth'))
+@bp.route('/home')
+def home():
+
+	return render_template('home.html')

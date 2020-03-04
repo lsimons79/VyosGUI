@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask,redirect
 
 def create_app(test_config=None):
 	#create and configure the application
@@ -22,7 +22,7 @@ def create_app(test_config=None):
 
 	@app.route('/hello')
 	def hello():
-		return 'Hello, World!'
+		return 'Hello, World'
 
 	#Applying blueprints to application
 	from vyosAPP import login, system

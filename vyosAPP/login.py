@@ -27,7 +27,7 @@ def auth():
 		if error_state is False:
 			session.clear()
 			session['user_id'] = user
-			return redirect(url_for('hello'))
+			return redirect(url_for('system.home'))
 
 		e = error
 		flash(e) 
@@ -44,17 +44,17 @@ def check_login_status():
 		g.user = 'vyos'
 
 @bp.route('/logout')
-def logout(vyos):
+def logout():
 	session.clear()
-	vyos.logout()
-	return redirect(url_for('auth'))
+#	vyos.exit()
+	return redirect(url_for('login.auth'))
 
 
 def check_user_login():
 	@functools.wraps(view)
 	def wrapped_view(**kwargs):
 		if g.user is None:
-			return redirect(url_for('auth'))
+			return redirect(url_for('login.auth'))
 
 		return view(**kwargs)
 	

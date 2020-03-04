@@ -7,9 +7,11 @@
     {% if g.user %}
       <li><span>{{ g.user }}</span>
       <li><a href="{{ url_for('login.logout') }}">Log Out</a>
+<!-- No reason for a login button to appear. User should always be logged in-->
     {% else %}
       <li><a href="{{ url_for('login.auth') }}">Log In</a>
     {% endif %}
+
   </ul>
 </nav>
 <section class="content">
