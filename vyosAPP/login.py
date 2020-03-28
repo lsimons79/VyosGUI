@@ -22,15 +22,13 @@ def auth():
 		except pexpect.pxssh.ExceptionPxssh as e:
 			error_state = True
 			error = str(e)
-			return error
+			flash(error)
+			return redirect(url_for('login.auth'))
 
 		if error_state is False:
 			session.clear()
 			session['user_id'] = user
 			return redirect(url_for('system.home'))
-
-		e = error
-		flash(e) 
 
 	return render_template('auth.html')
 

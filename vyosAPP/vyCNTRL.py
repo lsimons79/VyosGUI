@@ -37,4 +37,12 @@ class RouterMGMT:
 		self.router.save()
 		self.router.exit()
 
+	def run(self, command):
+		self.router.configure()
+		split_cmd = str(self.router.run_conf_mode_command(command)).split('[m')
+		return split_cmd[0]
+
+	def exit(self):
+		self.router.exit()
+		
 vyos = None

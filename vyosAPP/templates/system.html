@@ -6,11 +6,11 @@
 
 {% block content %}
   <form method="post">
-    <label for="hostname">Hostname</label>
+    <label for="hostname">Hostname: {{cur_hn}}</label>
     <input type="text" name="hostname" id="hostname">
-    <br><label for="dns">Primary DNS Server</label>
+    <br><label for="dns">Primary DNS Server: {{cur_dns}}</label>
     <input type="text" name="dns" id="dns">
-    <br><label for="gateway">Default Gateway</label>
+    <br><label for="gateway">Default Gateway: {{cur_dg}}</label>
     <input type="text" name="gateway" id="gateway">
     <br><input type="submit" name="commit" value="commit">
     <br><input type="submit" name="save" value="save">
