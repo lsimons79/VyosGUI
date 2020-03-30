@@ -1,11 +1,12 @@
-% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block header %}
   <h1>{% block title %}Set Firwall Rules{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-<h2> Create Zone: </h2>
+{{int}}
+<!-- <h2> Create Zone: </h2>
   <form method="post">
     <label for="zoneName">Zone Name:</label>
     <input type="text" name="zoneName" id="zoneName">
@@ -23,5 +24,5 @@
     <input type="text" name="gateway" id="gateway">
     <br><input type="submit" name="commit" value="commit">
     <br><input type="submit" name="save" value="save">
-  </form>
+  </form> -->
 {% endblock %}
