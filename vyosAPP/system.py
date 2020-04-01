@@ -54,35 +54,32 @@ def firewall():
 	vyos.exit()
 
 
-#       if request.method == 'POST':
-#		vyos = RouterMGMT('vyos', 'vyos')
-#		if 'commit' in request.form:
-#			u_x = request.form['x']
-#			u_x = request.form['x']
-#			u_x = request.form['x']
-#			e = None
-#			error = None
-#
-#			try:
-#				vyos.(x)
-#				vyos.(x)
-#				vyos.(x) 
-#			except vymgmt.router.ConfigError as e:
-#				error = str(e)
-#				flash(error)
-#				return redirect(url_for('system.settings'))
+       if request.method == 'POST':
+		vyos = RouterMGMT('vyos', 'vyos')
+		if 'commit1' in request.form:
+			u_zname = request.form['zoneName']
+			u_int = request.form['interface']
+			e = None
+			error = None
 
-#               elif 'save' in request.form:
-#			e = None
-#			error = None
-#			try:
-#				vyos.save()
-#			except vymgmt.router.ConfigError as e:
+			try:
+				vyos.zone(u_zname, u_int)
+			except vymgmt.router.ConfigError as e:
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.firewall'))
 
-#				error = str(e)
-#				flash(error)
-#				return redirect(url_for('system.firewall'))
-#
+               elif 'save' in request.form:
+			e = None
+			error = None
+			try:
+				vyos.save()
+			except vymgmt.router.ConfigError as e:
+
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.firewall'))
+
 	return render_template('firewall.html', int=interface)
 
 @bp.route('/home')

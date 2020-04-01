@@ -5,24 +5,50 @@
 {% endblock %}
 
 {% block content %}
-{{int}}
-<br>{{int[0]}}
 <h2> Create Zone: </h2>
-  <form method="post">
-    <label for="zoneName">Zone Name:</label>
-    <input type="text" name="zoneName" id="zoneName">
-    <label for="dns">Interface: </label>
-    <select id="interface"></select>
-		<script>
-		    var interface = {{int|tojson}}
-		    var options = "";
-		    for(var i in interface){
-		        options += "<option>"+ interface[i] +"</option>";
-		    }
-		    document.getElementById("interface").innerHTML = options;
-		</script>
+	<form method="post">
+		<label for="zoneName">Zone Name:</label>
+		<input type="text" name="zoneName" id="zoneName">
+		<label for="interface">Interface: </label>
+		<select id="interface"></select>
+			<script>
+				var interface = {{int|tojson}}
+				var options = "";
+				for(var i in interface){
+					options += "<option>"+ interface[i] +"</option>";
+				}
+				document.getElementById("interface").innerHTML = options;
+			</script>
 	
-    <br><input type="submit" name="commit" value="commit">
-    <br><input type="submit" name="save" value="save">
-  </form> -->
+		<br><input type="submit" name="commit" value="commit1">
+	</form>
+<!-- <h2> Create Zone Link: </h2>
+	<form method="post">
+		<label for="zoneName">Receiving Zone:</label>
+		<select id="zone1"></select>
+			<script>
+				var zone1 = {{zone|tojson}}
+				var options = "";
+				for(var i in zone1){
+					options += "<option>"+ zone1[i] +"</option>";
+				}
+				document.getElementById("zone1").innerHTML = options;
+			</script>
+		<label for="zoneName">Sending Zone:</label>
+		<select id="zone2"></select>
+			<script>
+				var interface = {{zone|tojson}}
+				var options = "";
+				for(var i in interface){
+					options += "<option>"+ interface[i] +"</option>";
+				}
+				document.getElementById("interface").innerHTML = options;
+			</script>
+  		<label for="linkName">Link Name:</label>
+		<input type="text" name="linkName" id="linkName">
+
+	</form> -->
+	<form method="post">
+	<br><input type="submit" name="save" value="save">
+	</form>
 {% endblock %}
