@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block header %} 
+   <h1>{% block title %} Current Configurations {% endblock%}
+{% endblock %}
+
 {% block content %}
 Hostname: {{cur_hn}}
 <br>Primary DNS Server: {{cur_dns}}

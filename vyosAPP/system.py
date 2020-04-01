@@ -44,8 +44,13 @@ def settings():
 def firewall():
 
 	vyos = RouterMGMT('vyos', 'vyos')
-	int = vyos.run('show interfaces ethernet')
-	interface=str(int[0]).split('ethernet')[2]
+	command = vyos.run('show interfaces')
+	eth = [i for i in command if "eth" in i]
+	int_split = []
+	interface = []
+	for i in range(len(eth)):
+		int_split.append(str(eth[i]).split('ethernet')[1])
+		interface.append(str(int_split[i]).split(' ')[1])
 	vyos.exit()
 
 
@@ -78,7 +83,7 @@ def firewall():
 #				flash(error)
 #				return redirect(url_for('system.firewall'))
 #
-	return render_template('firewall.html', int=int)
+	return render_template('firewall.html', int=interface)
 
 @bp.route('/home')
 def home():

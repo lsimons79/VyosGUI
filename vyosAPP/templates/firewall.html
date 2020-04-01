@@ -6,22 +6,22 @@
 
 {% block content %}
 {{int}}
-<!-- <h2> Create Zone: </h2>
+<br>{{int[0]}}
+<h2> Create Zone: </h2>
   <form method="post">
     <label for="zoneName">Zone Name:</label>
     <input type="text" name="zoneName" id="zoneName">
-    <label for="dns">Interface:</label>
+    <label for="dns">Interface: </label>
     <select id="interface"></select>
 		<script>
-			var options = "";
-			for(interface in int_list){
-			options += "<option>"+ interface +"</option>";
-			}
-			document.getElementById("interface").innerHTML = options;
+		    var interface = {{int|tojson}}
+		    var options = "";
+		    for(var i in interface){
+		        options += "<option>"+ interface[i] +"</option>";
+		    }
+		    document.getElementById("interface").innerHTML = options;
 		</script>
 	
-    <br><label for="gateway">Default Gateway: {{cur_dg}}</label>
-    <input type="text" name="gateway" id="gateway">
     <br><input type="submit" name="commit" value="commit">
     <br><input type="submit" name="save" value="save">
   </form> -->
