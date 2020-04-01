@@ -33,7 +33,7 @@ class RouterMGMT:
 		self.router.exit(force=True)
 
 	def zone(self, u_zname, u_int):
-                zname = f'set zone-policy zone {u_zname} interface {u_int}
+                zname = f'set zone-policy zone {u_zname} interface {u_int}'
                 self.router.configure()
                 self.router.set(gateway)
                 self.router.commit()
@@ -44,10 +44,12 @@ class RouterMGMT:
 		self.router.save()
 		self.router.exit()
 
-	def run(self, command):
+	def format(self, command):
 		self.router.configure()
 		split_cmd = str(self.router.run_conf_mode_command(command)).split('[m')
 		return split_cmd
+
+	def format2(self, command):
 
 	def exit(self):
 		self.router.exit()
