@@ -33,11 +33,11 @@ class RouterMGMT:
 		self.router.exit(force=True)
 
 	def zone(self, u_zname, u_int):
-                zname = f'set zone-policy zone {u_zname} interface {u_int}'
-                self.router.configure()
-                self.router.set(gateway)
-                self.router.commit()
-                self.router.exit(force=True)
+		zname = f'zone-policy zone {u_zname} interface {u_int}'
+		self.router.configure()
+		self.router.set(zname)
+		self.router.commit()
+		self.router.exit(force=True)
 
 	def save(self):
 		self.router.configure()

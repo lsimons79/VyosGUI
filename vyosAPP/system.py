@@ -17,7 +17,7 @@ def settings():
 			u_gateway = request.form['gateway']
 			e = None
 			error = None
- 
+
 			try:
 				vyos.hostname(u_host)
 				vyos.nameserver(u_dns)
@@ -54,9 +54,9 @@ def firewall():
 	vyos.exit()
 
 
-        if request.method == 'POST':
-                vyos = RouterMGMT('vyos', 'vyos')
-                if 'commit1' in request.form:
+	if request.method == 'POST':
+		vyos = RouterMGMT('vyos', 'vyos')
+		if 'commit1' in request.form:
 			u_zname = request.form['zoneName']
 			u_int = request.form['interface']
 			e = None
@@ -69,7 +69,7 @@ def firewall():
 				flash(error)
 				return redirect(url_for('system.firewall'))
 
-                elif 'save' in request.form:
+		elif 'save' in request.form:
 			e = None
 			error = None
 			try:
@@ -89,8 +89,8 @@ def home():
 	hn=str(ps_hn[0]).split('host-name')[2]
 	vyos2.exit()
 	ps_dg=vyos2.format('show protocols static route 0.0.0.0/0 next-hop')
-        dg=str(ps_dg[0]).split('next-hop')[2]
-        dg=dg.append(str(int_split[i]).split(' ')[1])
+	dg=str(ps_dg[0]).split('next-hop')[2]
+	dg=str(dg).split(' ')[1]
 	vyos2.exit()
 	ps_ds=vyos2.format('show system name-server')
 	ds=str(ps_ds[0]).split('name-server')[2]

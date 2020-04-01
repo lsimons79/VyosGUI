@@ -10,7 +10,7 @@
 		<label for="zoneName">Zone Name:</label>
 		<input type="text" name="zoneName" id="zoneName">
 		<label for="interface">Interface: </label>
-		<select id="interface"></select>
+		<select name="interface" id="interface">
 			<script>
 				var interface = {{int|tojson}}
 				var options = "";
@@ -19,15 +19,15 @@
 				}
 				document.getElementById("interface").innerHTML = options;
 			</script>
-	
-		<br><input type="submit" name="commit" value="commit1">
+		</select>
+		<br><input type="submit" name="commit1" value="commit">
 	</form>
 <!-- <h2> Create Zone Link: </h2>
 	<form method="post">
 		<label for="zoneName">Receiving Zone:</label>
 		<select id="zone1"></select>
 			<script>
-				var zone1 = {{zone|tojson}}
+				var zone1 = {{zone}}
 				var options = "";
 				for(var i in zone1){
 					options += "<option>"+ zone1[i] +"</option>";
@@ -37,7 +37,7 @@
 		<label for="zoneName">Sending Zone:</label>
 		<select id="zone2"></select>
 			<script>
-				var interface = {{zone|tojson}}
+				var interface = {{zone}}
 				var options = "";
 				for(var i in interface){
 					options += "<option>"+ interface[i] +"</option>";
