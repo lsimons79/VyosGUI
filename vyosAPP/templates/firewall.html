@@ -22,32 +22,32 @@
 		</select>
 		<br><input type="submit" name="commit1" value="commit">
 	</form>
-<!-- <h2> Create Zone Link: </h2>
+<h2> Create Zone Link: </h2>
 	<form method="post">
-		<label for="zoneName">Receiving Zone:</label>
-		<select id="zone1"></select>
+		<label for="zone1">Receiving Zone:</label>
+		<select name="zone1" id="zone1"></select>
 			<script>
-				var zone1 = {{zone}}
+				var zone1 = {{zone|tojson}}
 				var options = "";
 				for(var i in zone1){
 					options += "<option>"+ zone1[i] +"</option>";
 				}
 				document.getElementById("zone1").innerHTML = options;
 			</script>
-		<label for="zoneName">Sending Zone:</label>
-		<select id="zone2"></select>
+		<label for="zone2">Sending Zone:</label>
+		<select name="zone2" id="zone2"></select>
 			<script>
-				var interface = {{zone}}
+				var zone2 = {{zone|tojson}}
 				var options = "";
-				for(var i in interface){
-					options += "<option>"+ interface[i] +"</option>";
+				for(var i in zone2){
+					options += "<option>"+ zone2[i] +"</option>";
 				}
-				document.getElementById("interface").innerHTML = options;
+				document.getElementById("zone2").innerHTML = options;
 			</script>
   		<label for="linkName">Link Name:</label>
 		<input type="text" name="linkName" id="linkName">
 
-	</form> -->
+	</form>
 	<form method="post">
 	<br><input type="submit" name="save" value="save">
 	</form>

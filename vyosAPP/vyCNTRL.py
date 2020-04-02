@@ -49,7 +49,9 @@ class RouterMGMT:
 		split_cmd = str(self.router.run_conf_mode_command(command)).split('[m')
 		return split_cmd
 
-#	def format2(self, command):
+	def format2(self, command):
+		split_cmd = str(self.router.run_op_mode_command(command)).split('[m')
+		return split_cmd
 
 	def exit(self):
 		self.router.exit()

@@ -53,6 +53,13 @@ def firewall():
 		interface.append(str(int_split[i]).split(' ')[1])
 	vyos.exit()
 
+	command2 = vyos.format2('show zone')
+	name = [i for i in command2 if "Name:" in i]
+	zone = []
+	for i in range(len(name)):
+		zone.append(str(name[i]).split('Name:')[1])
+
+	vyos.exit()
 
 	if request.method == 'POST':
 		vyos = RouterMGMT('vyos', 'vyos')
@@ -80,7 +87,7 @@ def firewall():
 				flash(error)
 				return redirect(url_for('system.firewall'))
 
-	return render_template('firewall.html', int=interface)
+	return render_template('firewall.html', int=interface, zone=zone)
 
 @bp.route('/home')
 def home():
@@ -89,7 +96,7 @@ def home():
 	hn=str(ps_hn[0]).split('host-name')[2]
 	vyos2.exit()
 	ps_dg=vyos2.format('show protocols static route 0.0.0.0/0 next-hop')
-	dg=str(ps_dg[0]).split('next-hop')[2]
+	dg=str(ps_dg[0]).split('next-hop ')[2]
 	dg=str(dg).split(' ')[1]
 	vyos2.exit()
 	ps_ds=vyos2.format('show system name-server')
