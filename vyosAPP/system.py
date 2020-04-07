@@ -89,6 +89,21 @@ def firewall():
 
 	return render_template('firewall.html', int=interface, zone=zone)
 
+
+@bp.route('/interfaces', methods=('GET', 'POST'))
+def interfaces():
+	vyos = RouterMGMT('vyos', 'vyos')
+	command = vyos.format('show interfaces')
+	eth = [i for i in command if "eth" in i]
+	int_split = []
+	interface = []
+	for i in range(len(eth)):
+		int_split.append(str(eth[i]).split('ethernet')[1])
+		interface.append(str(int_split[i].split(' ')[1])
+	vyos.exit()
+		
+	return render_template('interfaces.html', int=interface, ip=ipadd)
+
 @bp.route('/home')
 def home():
 	vyos2 = RouterMGMT('vyos', 'vyos')
@@ -96,7 +111,7 @@ def home():
 	hn=str(ps_hn[0]).split('host-name')[2]
 	vyos2.exit()
 	ps_dg=vyos2.format('show protocols static route 0.0.0.0/0 next-hop')
-	dg=str(ps_dg[0]).split('next-hop ')[2]
+	dg=str(ps_dg[0]).split('next-hop')[2]
 	dg=str(dg).split(' ')[1]
 	vyos2.exit()
 	ps_ds=vyos2.format('show system name-server')
