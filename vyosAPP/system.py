@@ -55,10 +55,11 @@ def firewall():
 
 	command2 = vyos.format2('show zone')
 	name = [i for i in command2 if "Name:" in i]
-	zone = []
+	nameSplit = []
+    zone = []
 	for i in range(len(name)):
-		zone.append(str(name[i]).split('Name:')[1])
-
+		nameSplit.append(str(name[i]).split('Name:')[1])
+        zone.append(str(nameSplit[i]).split('/n')[1])
 	vyos.exit()
 
 	if request.method == 'POST':
@@ -75,6 +76,20 @@ def firewall():
 				error = str(e)
 				flash(error)
 				return redirect(url_for('system.firewall'))
+
+        elif 'commit2' in request.form:
+            u_zone1 = request.form['zone1']
+            u_zone2 = request.form['zone2']
+            u_lname = request.form['linkName']
+            e = None
+            error = None
+            
+            try:
+                vyos.link(u_zone1, u_zone2, u_lname)
+            except vymgmt.router.ConfigError as e:
+                error = str(e)
+                flash(error)
+                return redirect(url_for('system.firewall'))
 
 		elif 'save' in request.form:
 			e = None
