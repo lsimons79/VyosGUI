@@ -38,6 +38,17 @@ class RouterMGMT:
 		self.router.set(zname)
 		self.router.commit()
 		self.router.exit(force=True)
+        
+    def link(self, u_zone1, u_zone2, u_lname)
+        lname = f'zone-policy zone {u_zone1} from {u-zone2} firewall name {u_lname}'
+        drop = f'firewall name {u_lname} default-action drop'
+        log = f'firewall name {u_lname} enable-default-log'
+        self.router.configure()
+        self.router.set(lname)
+        self.router.set(drop)
+        self.router.set(log)
+        self.router.commit()
+        self.router.exit(force=True)
 
 	def save(self):
 		self.router.configure()
