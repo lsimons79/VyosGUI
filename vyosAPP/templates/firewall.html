@@ -50,8 +50,12 @@
 	</form>
 <h2>Create Firewall Rules:</h2>
 	<form method="post">
-		
-		<label for="name">Name:</label>
+		<label for="established">Do you want to enable state established as rule 1?</label>
+		<fieldset id="established">
+			<input type="radio" value="yes" name="established">
+			<input type="radio" value="no" name="established">
+		</fieldset>
+		<label for="name">Firewall Name:</label>
 		<select name="name" id="name"></select>
 			<script>
 				var name = {{name|tojson}}
@@ -61,8 +65,49 @@
 				}
 				document.getElementById("name").innerHTML = options;
 			</script>
-
-
+		<label for="rule">Rule Number (1-9999): </label>
+		<input type="text" name="rule" id="rule">
+		<label for="action">Action:</label>
+		<fieldset id="action">
+			<input type="radio" value="accept" name="action">
+			<input type="radio" value="deny" name="action">
+		</fieldset>
+		<label for="protocol">Protocol: </label>
+		<input type="text" list="protocol">
+			<datalist id="protocol">
+				<option value="tcp">
+				<option value="udp">
+				<option value="icmp">
+				<option value="tcp_udp">
+			</datalist>
+		<label for="action">Action:</label>
+		<fieldset id="action">
+			<input type="radio" value="accept" name="action">
+			<input type="radio" value="deny" name="action">
+		</fieldset>
+		<label for="protocol">Protocol: </label>
+		<input type="text" list="protocol">
+			<datalist id="protocol">
+				<option value="tcp">
+				<option value="udp">
+				<option value="icmp">
+				<option value="tcp_udp">
+			</datalist>
+		<label for="direction">Source or Destination rule:</label>
+		<fieldset id="direction">
+			<input type="radio" value="Source" name="direction">
+			<input type="radio" value="Destination" name="direction">
+		</fieldset>
+		<label for="port">Port: </label>
+		<input type="text" list="port">
+			<datalist id="port">
+				<option value="80">
+				<option value="443">
+				<option value="http">
+				<option value="https">
+			</datalist>
+		<label for="address">Address: </label>
+		<input type="text" name="address" id="address">
 	</form>
 
 <form method="post">
