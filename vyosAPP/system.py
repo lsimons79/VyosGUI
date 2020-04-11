@@ -46,20 +46,31 @@ def firewall():
 	vyos = RouterMGMT('vyos', 'vyos')
 	command = vyos.format('show interfaces')
 	eth = [i for i in command if "eth" in i]
-	int_split = []
+	intSplit = []
 	interface = []
 	for i in range(len(eth)):
-		int_split.append(str(eth[i]).split('ethernet')[1])
-		interface.append(str(int_split[i]).split(' ')[1])
+		intSplit.append(str(eth[i]).split('ethernet')[1])
+		interface.append(str(intSplit[i]).split(' ')[1])
 	vyos.exit()
 
-	command2 = vyos.format2('show zone')
-	name = [i for i in command2 if "Name:" in i]
+	command2 = vyos.format('show zone-policy')
+	policy = [i for i in command2 if "zone" in i]
+	policy = [s.replace('zone-policy', ' ') for s in policy]
+	policySplit = []
+	zone = []
+	for i in range(len(policy)):
+		policySplit.append(str(policy[i]).split('zone')[1])
+		zone.append(str(policySplit[i]).split(' ')[1])
+	vyos.exit()
+
+	vyos = RouterMGMT('vyos', 'vyos')
+	command3 = vyos.format('show firewall')
+	firewall = [i for i in command3 if "name" in i]
 	nameSplit = []
-    zone = []
-	for i in range(len(name)):
-		nameSplit.append(str(name[i]).split('Name:')[1])
-        zone.append(str(nameSplit[i]).split('/n')[1])
+	name = []
+	for i in range(len(firewall)):
+		nameSplit.append(str(firewall[i]).split('name')[1])
+		name.append(str(nameSplit[i]).split(' ')[1])
 	vyos.exit()
 
 	if request.method == 'POST':
@@ -77,19 +88,19 @@ def firewall():
 				flash(error)
 				return redirect(url_for('system.firewall'))
 
-        elif 'commit2' in request.form:
-            u_zone1 = request.form['zone1']
-            u_zone2 = request.form['zone2']
-            u_lname = request.form['linkName']
-            e = None
-            error = None
-            
-            try:
-                vyos.link(u_zone1, u_zone2, u_lname)
-            except vymgmt.router.ConfigError as e:
-                error = str(e)
-                flash(error)
-                return redirect(url_for('system.firewall'))
+		elif 'commit2' in request.form:
+			u_zone1 = request.form['zone1']
+			u_zone2 = request.form['zone2']
+			u_lname = request.form['linkName']
+			e = None
+			error = None
+
+			try:
+				vyos.link(u_zone1, u_zone2, u_lname)
+			except vymgmt.router.ConfigError as e:
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.firewall'))
 
 		elif 'save' in request.form:
 			e = None
@@ -102,7 +113,7 @@ def firewall():
 				flash(error)
 				return redirect(url_for('system.firewall'))
 
-	return render_template('firewall.html', int=interface, zone=zone)
+	return render_template('firewall.html', int=interface, zone=zone, name=name)
 
 
 @bp.route('/interfaces', methods=('GET', 'POST'))
@@ -114,10 +125,35 @@ def interfaces():
 	interface = []
 	for i in range(len(eth)):
 		int_split.append(str(eth[i]).split('ethernet')[1])
-		interface.append(str(int_split[i].split(' ')[1])
+		interface.append(str(int_split[i]).split(' ')[1])
 	vyos.exit()
-		
-	return render_template('interfaces.html', int=interface, ip=ipadd)
+	
+	if request.method == 'POST':
+		vyos = RouterMGMT('vyos', 'vyos')
+		if 'commit' in request.form:
+			u_address = request.form['ipaddress']
+			u_int = request.form['interface']
+			e = None
+			error = None
+
+			try:
+				vyos.setint(u_int, u_address)
+			except vymgmt.router.ConfigError as e:
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.interfaces'))
+
+		elif 'save' in request.form:
+			e  = None
+			error = None
+			try:
+				vyos.save()
+			except vymgmt.router.ConfigError as e:
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.interfaces'))	
+
+	return render_template('interfaces.html', int=interface)
 
 @bp.route('/home')
 def home():

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} Configure Interfaces {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2> Set IP Address: </h2>
+	<form method="post">
+		<label for="zoneName">IP Address: </label>
+		<input type="text" name="ipaddress" id="ipaddress">
+		<label for="interface">Interface and Address: </label>
+		<select name="interface" id="interface">
+			<script>
+				var interface = {{int|tojson}}
+				var options = "";
+				for(var i in interface){
+					options += "<option>"+ interface[i] + "</option>";
+				}
+				document.getElementById("interface").innerHTML = options;
+			</script>
+		</select>
+		<br><input type="submit" name="commit" value="commit">
+                <br><input type="submit" name="save" value="save">
+	</form>
+{% endblock %}

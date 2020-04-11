@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Set Firwall Rules{% endblock %}</h1>
+  <h1>{% block title %}Firwall Configuration{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -48,7 +48,25 @@
 		<input type="text" name="linkName" id="linkName">
 
 	</form>
+<h2>Create Firewall Rules:</h2>
 	<form method="post">
-	<br><input type="submit" name="save" value="save">
+		
+		<label for="name">Name:</label>
+		<select name="name" id="name"></select>
+			<script>
+				var name = {{name|tojson}}
+				var options = "";
+				for(var i in name){
+					options += "<option>"+ name[i] +"</option>";
+				}
+				document.getElementById("name").innerHTML = options;
+			</script>
+
+
 	</form>
+
+<form method="post">
+<br><input type="submit" name="save" value="save">
+</form>
+
 {% endblock %}
