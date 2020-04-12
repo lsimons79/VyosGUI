@@ -34,7 +34,7 @@
 				}
 				document.getElementById("zone1").innerHTML = options;
 			</script>
-		<label for="zone2">Sending Zone:</label>
+		<br><label for="zone2">Sending Zone:</label>
 		<select name="zone2" id="zone2"></select>
 			<script>
 				var zone2 = {{zone|tojson}}
@@ -44,18 +44,21 @@
 				}
 				document.getElementById("zone2").innerHTML = options;
 			</script>
-  		<label for="linkName">Link Name:</label>
+  		<br><label for="linkName">Link Name:</label>
 		<input type="text" name="linkName" id="linkName">
 
 	</form>
 <h2>Create Firewall Rules:</h2>
+	{{name}}
 	<form method="post">
 		<label for="established">Do you want to enable state established as rule 1?</label>
 		<fieldset id="established">
-			<input type="radio" value="yes" name="established">
-			<input type="radio" value="no" name="established">
+			<input type="radio" id="yes" value="yes" name="established">
+			<label for="yes">Yes</label><br>
+			<input type="radio" id="no" value="no" name="established">
+			<label for="no">No</label>
 		</fieldset>
-		<label for="name">Firewall Name:</label>
+		<br><label for="name">Firewall Name:</label>
 		<select name="name" id="name"></select>
 			<script>
 				var name = {{name|tojson}}
@@ -65,38 +68,21 @@
 				}
 				document.getElementById("name").innerHTML = options;
 			</script>
-		<label for="rule">Rule Number (1-9999): </label>
+		<br><label for="rule">Rule Number (1-9999): </label>
 		<input type="text" name="rule" id="rule">
 		<label for="action">Action:</label>
 		<fieldset id="action">
-			<input type="radio" value="accept" name="action">
-			<input type="radio" value="deny" name="action">
+			<input type="radio" id="accept" value="accept" name="action">
+			<label for="accept">Accept</label><br>
+			<input type="radio" id="deny" value="deny" name="action">
+			<label for="deny">Deny</label>
 		</fieldset>
-		<label for="protocol">Protocol: </label>
-		<input type="text" list="protocol">
-			<datalist id="protocol">
-				<option value="tcp">
-				<option value="udp">
-				<option value="icmp">
-				<option value="tcp_udp">
-			</datalist>
-		<label for="action">Action:</label>
-		<fieldset id="action">
-			<input type="radio" value="accept" name="action">
-			<input type="radio" value="deny" name="action">
-		</fieldset>
-		<label for="protocol">Protocol: </label>
-		<input type="text" list="protocol">
-			<datalist id="protocol">
-				<option value="tcp">
-				<option value="udp">
-				<option value="icmp">
-				<option value="tcp_udp">
-			</datalist>
-		<label for="direction">Source or Destination rule:</label>
+		<br><label for="direction">Source or Destination rule:</label>
 		<fieldset id="direction">
-			<input type="radio" value="Source" name="direction">
-			<input type="radio" value="Destination" name="direction">
+			<input type="radio" id="source" value="source" name="direction">
+			<label for="source">Source</label><br>
+			<input type="radio" id="destination" value="destination" name="direction">
+			<label for="destination">Destination</label>
 		</fieldset>
 		<label for="port">Port: </label>
 		<input type="text" list="port">
@@ -106,8 +92,18 @@
 				<option value="http">
 				<option value="https">
 			</datalist>
+		<label for="protocol">Protocol: </label>
+		<input type="text" list="protocol">
+			<datalist id="protocol">
+				<option value="tcp">
+				<option value="udp">
+				<option value="icmp">
+				<option value="tcp_udp">
+			</datalist>
 		<label for="address">Address: </label>
 		<input type="text" name="address" id="address">
+		<br><input type="submit" name="commit3" value="commit">
+
 	</form>
 
 <form method="post">

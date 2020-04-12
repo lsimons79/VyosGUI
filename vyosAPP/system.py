@@ -102,6 +102,31 @@ def firewall():
 				flash(error)
 				return redirect(url_for('system.firewall'))
 
+		elif 'commit3' in request.form:
+			u_name = request.form['name']
+			u_rule = request.form['rule']
+			u_direction = request.form['direction']
+			u_port = request.form['port']
+			u_protocol = request.form['protocol']
+			u_address = request.form['address']
+			e = None
+			error = None
+
+			if request.form['established'] == "yes":
+				try:
+					vyos.established()
+				except vymgmt.router.ConfigError as e:
+					error = str(e)
+					flash(error)
+					return redirect(url_for('system.firewall'))
+
+			try:
+				vyos.rule(u_rule, u_name, u_direction, u_port, u_protocol, u_address)
+			except vymgmt.router.ConfigError as e:
+				error = str(e)
+				flash(error)
+				return redirect(url_for('system.firewall'))
+
 		elif 'save' in request.form:
 			e = None
 			error = None

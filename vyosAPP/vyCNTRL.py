@@ -50,6 +50,32 @@ class RouterMGMT:
 		self.router.commit()
 		self.router.exit(force=True)
 
+	def established(self, u_name):
+		action = f'firewall name {u_name} rule 1 action accept'
+		state = f'firewall name {u_name} rule 1 state established enable'
+		self.router.configure()
+		self.router.set(action)
+		self.router.set(state)
+		self.router.commit()
+		self.router.exit(force=True)
+
+	def rule(self, u_name, u_rule, u_action, u_port, u_protocol, u_address, u_direction):
+		action = f'firewall name {u_name} rule {u_rule} action {u_action}'
+		port = f'firewall name {u_name} rule {u_rule} {u_direction} port {u_port}'
+		protocol = f'firewall name {u_name} rule {u_rule} protocol {u_protocl}'
+		address = f'firewall name {u_name} rule {u_rule} {u_direction} address {u_address}'
+		self.router.configure()
+		self.router.set(action)
+		if {u_port}:
+			self.router.set(port)
+		if {u_protocol}:
+			self.router.set(protocol)
+		if {u_address}:
+			self.router.set(address)
+		self.router.commit()
+		self.router.exit(force=True)
+
+
 	def setint(self, u_int, u_address):
 		u_cmd = f'interfaces ethernet {u_int} address {u_address}'
 		self.router.configure()
@@ -65,10 +91,6 @@ class RouterMGMT:
 	def format(self, command):
 		self.router.configure()
 		split_cmd = str(self.router.run_conf_mode_command(command)).split('[m')
-		return split_cmd
-
-	def format2(self, command):
-		split_cmd = str(self.router.run_op_mode_command(command)).split('[m')
 		return split_cmd
 
 	def exit(self):
