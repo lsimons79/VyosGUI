@@ -49,7 +49,7 @@
 
 	</form>
 <h2>Create Firewall Rules:</h2>
-	{{name}}
+	{{name|tojson}} {{zone|tojson}}
 	<form method="post">
 		<label for="established">Do you want to enable state established as rule 1?</label>
 		<fieldset id="established">
@@ -58,15 +58,15 @@
 			<input type="radio" id="no" value="no" name="established">
 			<label for="no">No</label>
 		</fieldset>
-		<br><label for="name">Firewall Name:</label>
-		<select name="name" id="name"></select>
+		<br><label for="fname">Firewall Name:</label>
+		<select name="fname" id="fname"></select>
 			<script>
-				var name = {{name|tojson}}
+				var fname = {{name|tojson}}
 				var options = "";
-				for(var i in name){
-					options += "<option>"+ name[i] +"</option>";
+				for(var i in fname){
+					options += "<option>"+ fname[i] +"</option>";
 				}
-				document.getElementById("name").innerHTML = options;
+				document.getElementById("fname").innerHTML = options;
 			</script>
 		<br><label for="rule">Rule Number (1-9999): </label>
 		<input type="text" name="rule" id="rule">

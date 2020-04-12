@@ -7,7 +7,7 @@ class RouterMGMT:
 		self.password = password
 		self.router = vymgmt.Router('127.0.0.1', self.username, password=self.password, port=22)
 		self.router.login()
-		 
+
 	def hostname(self, u_host):
 		hostname = f'system host-name {u_host}'
 		self.router.configure()
@@ -15,7 +15,7 @@ class RouterMGMT:
 		self.router.set(hostname)
 		self.router.commit()
 		self.router.exit(force=True)
-		
+
 	def nameserver(self, u_dns):
 		dns = f'system name-server {u_dns}'
 		self.router.configure()
@@ -38,7 +38,7 @@ class RouterMGMT:
 		self.router.set(zname)
 		self.router.commit()
 		self.router.exit(force=True)
-        
+
 	def link(self, u_zone1, u_zone2, u_lname):
 		drop = f'firewall name {u_lname} default-action drop'
 		log = f'firewall name {u_lname} enable-default-log'
@@ -59,11 +59,11 @@ class RouterMGMT:
 		self.router.commit()
 		self.router.exit(force=True)
 
-	def rule(self, u_name, u_rule, u_action, u_port, u_protocol, u_address, u_direction):
-		action = f'firewall name {u_name} rule {u_rule} action {u_action}'
-		port = f'firewall name {u_name} rule {u_rule} {u_direction} port {u_port}'
-		protocol = f'firewall name {u_name} rule {u_rule} protocol {u_protocl}'
-		address = f'firewall name {u_name} rule {u_rule} {u_direction} address {u_address}'
+	def rule(self, u_fname, u_rule, u_action, u_port, u_protocol, u_address, u_direction):
+		action = f'firewall name {u_fname} rule {u_rule} action {u_action}'
+		port = f'firewall name {u_fname} rule {u_rule} {u_direction} port {u_port}'
+		protocol = f'firewall name {u_fname} rule {u_rule} protocol {u_protocl}'
+		address = f'firewall name {u_fname} rule {u_rule} {u_direction} address {u_address}'
 		self.router.configure()
 		self.router.set(action)
 		if {u_port}:
