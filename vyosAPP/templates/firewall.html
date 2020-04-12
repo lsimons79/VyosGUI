@@ -46,10 +46,10 @@
 			</script>
   		<br><label for="linkName">Link Name:</label>
 		<input type="text" name="linkName" id="linkName">
+		<br><input type="submit" name="commit2" value="commit">
 
 	</form>
 <h2>Create Firewall Rules:</h2>
-	{{name|tojson}} {{zone|tojson}}
 	<form method="post">
 		<label for="established">Do you want to enable state established as rule 1?</label>
 		<fieldset id="established">
@@ -85,7 +85,7 @@
 			<label for="destination">Destination</label>
 		</fieldset>
 		<label for="port">Port: </label>
-		<input type="text" list="port">
+		<input list="port" name="port">
 			<datalist id="port">
 				<option value="80">
 				<option value="443">
@@ -93,7 +93,7 @@
 				<option value="https">
 			</datalist>
 		<label for="protocol">Protocol: </label>
-		<input type="text" list="protocol">
+		<input list="protocol" name="protocol">
 			<datalist id="protocol">
 				<option value="tcp">
 				<option value="udp">

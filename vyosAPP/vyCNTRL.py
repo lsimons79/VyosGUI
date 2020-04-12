@@ -59,10 +59,10 @@ class RouterMGMT:
 		self.router.commit()
 		self.router.exit(force=True)
 
-	def rule(self, u_fname, u_rule, u_action, u_port, u_protocol, u_address, u_direction):
+	def rule(self, u_fname, u_rule, u_action, u_direction, u_port, u_protocol, u_address):
 		action = f'firewall name {u_fname} rule {u_rule} action {u_action}'
 		port = f'firewall name {u_fname} rule {u_rule} {u_direction} port {u_port}'
-		protocol = f'firewall name {u_fname} rule {u_rule} protocol {u_protocl}'
+		protocol = f'firewall name {u_fname} rule {u_rule} protocol {u_protocol}'
 		address = f'firewall name {u_fname} rule {u_rule} {u_direction} address {u_address}'
 		self.router.configure()
 		self.router.set(action)

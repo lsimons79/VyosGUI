@@ -123,7 +123,7 @@ def firewall():
 					return redirect(url_for('system.firewall'))
 
 			try:
-				vyos.rule(u_rule, u_fname, u_action, u_direction, u_port, u_protocol, u_address)
+				vyos.rule(u_fname, u_rule, u_action, u_direction, u_port, u_protocol, u_address)
 			except vymgmt.router.ConfigError as e:
 				error = str(e)
 				flash(error)
